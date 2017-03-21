@@ -1,0 +1,13 @@
+{
+  "apps" : [{
+    "name": "greedy-alligator",
+    "script": "src/server/server.js",
+    "watch": ["config", "src/**/*.js", "src/**/*.jsx"],
+    "env": {
+      "NODE_ENV": "development"
+    },
+    "env_production" : {
+       "NODE_ENV": "production"
+    }
+  }]
+}

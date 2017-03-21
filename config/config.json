@@ -1,0 +1,39 @@
+{
+  "common": {
+    "drEdition": {
+      "url": "https://dredition-api.aptoma.no/editions/",
+      "apikey": "fc7139c3f8bb77768e46fdb1773c6d8c",
+      "frontpageEditionId": "58d0e98ac434617438cdbd3f",
+      "drpImageApiKey": "9c1b55fbcec7cabfc98d4f83e529793f",
+      "drfImageApiKey": "89030e1eea189ac6e7d96d0b03ba688a"
+    },
+    "breakpoints": {
+      "mobile": {
+        "min": 0,
+        "max": 413
+      },
+      "small": {
+        "min": 414,
+        "max": 767
+      },
+      "medium": {
+        "min": 768,
+        "max": 979
+      },
+      "large": {
+        "min": 980,
+        "max": 1231
+      },
+      "full": {
+        "min": 1232,
+        "max": false
+      }
+    }
+  },
+  "development": {
+    "port": 3006
+  },
+  "production": {
+    "port": 3007
+  }
+}
