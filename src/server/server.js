@@ -1,6 +1,8 @@
 require('babel-register');
 
+// React related modules
 const renderToString = require('react-dom/server').renderToString;
+const Styletron = require('styletron-server');
 
 // ExpressJS modules
 const express = require('express');
@@ -63,8 +65,10 @@ app.get('/', (req, res) => {
   console.log('Rendering /');
   drEdition.getEdition(config.drEdition.frontpageEditionId).then(edition => {
     const template = 'index.njk';
+    const styletron = new Styletron();
 
     const context = {
+      styletron,
       title: 'Frontpage title',
       items: edition.data.attributes.items,
     };
@@ -72,6 +76,7 @@ app.get('/', (req, res) => {
     const data = {
       app: renderToString(IndexPage(context)),
       context: JSON.stringify(context),
+      styles: styletron.getStylesheetsHtml(),
     };
 
     res.render(template, data);
