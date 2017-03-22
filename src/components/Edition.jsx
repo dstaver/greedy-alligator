@@ -4,7 +4,9 @@ const EditionArticle = require('./EditionArticle');
 
 const Edition = props => {
   const title = 'Edition';
-  const articles = props.items.map(article => <EditionArticle title={article.data.title} />);
+  const articles = props.items.map(article => (
+    <EditionArticle key={article.data.id} title={article.data.title} />
+  ));
 
   return (
     <div>

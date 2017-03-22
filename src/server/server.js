@@ -1,12 +1,13 @@
 require('babel-register');
 
+const renderToString = require('react-dom/server').renderToString;
+
 // ExpressJS modules
 const express = require('express');
 const nunjucks = require('nunjucks');
 const compression = require('compression');
 const sharedContext = require('shared-context');
 const minifyHTML = require('express-minify-html');
-const reactExpressMiddleware = require('react-express-middleware');
 
 // Project modules
 const config = require('./config.js');
@@ -50,12 +51,7 @@ nunjucks.configure('src/server/views', {
 
 app.set('view engine', 'njk');
 
-app.use(
-  reactExpressMiddleware({
-    element: 'app',
-  }),
-  sharedContext()
-);
+app.use(sharedContext());
 
 //eslint-disable-next-line
 app.use((err, req, res, next) => {
@@ -66,9 +62,19 @@ app.use((err, req, res, next) => {
 app.get('/', (req, res) => {
   console.log('Rendering /');
   drEdition.getEdition(config.drEdition.frontpageEditionId).then(edition => {
-    res.locals.title = 'Frontpage title';
-    res.locals.items = edition.data.attributes.items;
-    res.renderReactComponent(IndexPage);
+    const template = 'index.njk';
+
+    const context = {
+      title: 'Frontpage title',
+      items: edition.data.attributes.items,
+    };
+
+    const data = {
+      app: renderToString(IndexPage(context)),
+      context: JSON.stringify(context),
+    };
+
+    res.render(template, data);
   });
 });
 
