@@ -78,5 +78,12 @@ app.get('/', (req, res) => {
   });
 });
 
+app.get('/react', (req, res) => {
+  console.log('hello react');
+  res.render('react', {
+    items: 'hello',
+  });
+});
+
 app.listen(config.port);
 console.log(`Server listening on ${config.port}`);
